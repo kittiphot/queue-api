@@ -19,8 +19,6 @@ class ServiceBoxControllers extends BaseController {
 
   private $response = array('status' => 1, 'message' => 'success');
   
-
-
   public function create(Request $request)
   {
     $result = new ServiceBox;
@@ -28,6 +26,21 @@ class ServiceBoxControllers extends BaseController {
     $result->status = 1;
     $result->save();
     return response()->json($this->response); 
+  }
+  public function edit(Request $request)
+  {
+    $results = ServiceBox::find($request->id);
+    $results->name = $request->name;
+    $results->status = 1;
+    $results->save();
+    return response()->json($this->response);
+  }
+  public function status_using(Request $request)
+  {
+    $results = ServiceBox::find($request->id);
+    $results->status = $request->status;
+    $results->save();
+    return response()->json($this->response);
   }
   
 }
