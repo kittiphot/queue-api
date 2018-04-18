@@ -23,3 +23,10 @@ $router->get('/list', 'ListsControllers@lists');
 $router->post('/list/create', 'ListsControllers@create');
 
 // $router->get('/temp', 'TempControllers@find');
+
+/*------------------- Staff -------------------*/
+$router->get('/staff', 'StaffControllers@staff');
+$router->post('/staff/create', 'StaffControllers@create');
+$router->put('/staff/edit', 'StaffControllers@edit');
+$router->put('/staff/delete/{id}', 'StaffControllers@delete');
+/*---------------------------------------------*/
