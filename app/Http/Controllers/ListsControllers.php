@@ -41,7 +41,8 @@ class ListsControllers extends BaseController {
         return response()->json($this->response);
         // return response()->json($results);
       }
-      $temp_results = Temp::find($temp_results['0']['id']);
+      Temp::where('id_service_box', $id_service_box)->delete();
+      $temp_results = new Temp;
       $temp_results->id_list = $lists_results['0']['id'];
       $temp_results->queue = $lists_results['0']['queue'];
       $temp_results->id_service_box = $id_service_box;
@@ -56,6 +57,12 @@ class ListsControllers extends BaseController {
     $lists_results->save();
     // return response()->json($lists_results); 
     return response()->json($this->response);
+  }
+  
+  public function temp()
+  {
+    $lists_results = Temp::orderby('id', 'desc')->get();
+    return response()->json($lists_results);
   }
 
   public function create(Request $request)
