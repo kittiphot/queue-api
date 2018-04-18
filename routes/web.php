@@ -22,4 +22,7 @@ $router->get('/key', function () use ($router) {
 $router->get('/list', 'ListsControllers@lists');
 $router->post('/list/create', 'ListsControllers@create');
 
+$router->post('/servicebox/create', 'ServiceBoxControllers@create');
+$router->post('/servicebox/edit', 'ServiceBoxControllers@edit');
+$router->post('/servicebox/status-using', 'ServiceBoxControllers@status_using');
 // $router->get('/temp', 'TempControllers@find');
