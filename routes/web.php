@@ -24,4 +24,17 @@ $router->post('/list/create', 'ListsControllers@create');
 $router->post('/create-staff','StaffController@create');
 $router->put('/config/edit','ConfigControllers@edit');
 
+$router->get('/temp', 'ListsControllers@temp');
+
+// $router->get('/temp', 'TempControllers@find');
+
+/*------------------- Staff -------------------*/
+$router->get('/staff', 'StaffControllers@staff');
+$router->post('/staff/create', 'StaffControllers@create');
+$router->put('/staff/edit', 'StaffControllers@edit');
+$router->put('/staff/delete/{id}', 'StaffControllers@delete');
+/*---------------------------------------------*/
+$router->post('/servicebox/create', 'ServiceBoxControllers@create');
+$router->post('/servicebox/edit', 'ServiceBoxControllers@edit');
+$router->post('/servicebox/status-using', 'ServiceBoxControllers@status_using');
 // $router->get('/temp', 'TempControllers@find');

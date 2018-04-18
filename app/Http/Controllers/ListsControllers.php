@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lists;
+use App\Models\Temp;
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
@@ -18,24 +19,58 @@ class ListsControllers extends BaseController {
 
   private $response = array('status' => 1, 'message' => 'success');
   
-  public function lists()
+  public function lists($id_service_box = 1, $id_staff = 1)
   {
-    $results = Lists::where('status', 1)->orderby('id', 'asc')->limit(1)->get();
-    // $results = Lists::find(1);
-    // $result->id_service_box = $request->id_service_box;
-    // $result->id_staff = $request->id_staff;
-    // $result->call_time = $request->call_time;
-    // $result->end_time = $request->end_time;
-    // $result->save();
-    return response()->json($results); 
-    // return response()->json($this->response); 
+    date_default_timezone_set("Asia/Bangkok");
+    $lists_results = Lists::where('status', 1)->orderby('id', 'asc')->limit(1)->get();
+    $temp_results = Temp::where('id_service_box', $id_service_box)->get();
+    // return response()->json($lists_results);
+    if ($temp_results == '[]') {
+      $temp_results = new Temp;
+      $temp_results->id_list = $lists_results['0']['id'];
+      $temp_results->queue = $lists_results['0']['queue'];
+      $temp_results->id_service_box = $id_service_box;
+      $temp_results->save();
+    }
+    else {
+      $temp_results = Temp::where('id_service_box', $id_service_box)->get();
+      $results = Lists::find($temp_results['0']['id_list']);
+      $results->end_time = date("Y-m-d h:i:s");
+      $results->save();
+      if ($lists_results == '[]') {
+        return response()->json($this->response);
+        // return response()->json($results);
+      }
+      Temp::where('id_service_box', $id_service_box)->delete();
+      $temp_results = new Temp;
+      $temp_results->id_list = $lists_results['0']['id'];
+      $temp_results->queue = $lists_results['0']['queue'];
+      $temp_results->id_service_box = $id_service_box;
+      $temp_results->save();
+    }
+    // return response()->json($lists_results);
+    $lists_results = Lists::find($temp_results->id_list);
+    $lists_results->id_service_box = $id_service_box;
+    $lists_results->id_staff = $id_staff;
+    $lists_results->call_time = date("Y-m-d h:i:s");
+    $lists_results->status = 0;
+    $lists_results->save();
+    // return response()->json($lists_results); 
+    return response()->json($this->response);
+  }
+  
+  public function temp()
+  {
+    $lists_results = Temp::orderby('id', 'desc')->get();
+    return response()->json($lists_results);
   }
 
   public function create(Request $request)
   {
     $result = new Lists;
     $result->queue = $request->queue;
-    $result->status = $request->status;
+    $result->status = 1;
+    $result->create_time = date("Y-m-d h:i:s");
     $result->save();
     return response()->json($this->response); 
   }
