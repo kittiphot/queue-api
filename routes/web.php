@@ -40,4 +40,4 @@ $router->post('/servicebox/status-using', 'ServiceBoxControllers@status_using');
 // $router->get('/temp', 'TempControllers@find');
 $router->get('/config', 'getConfigControllers@config');
 $router->post('/config/create', 'getConfigControllers@create');
-$router->put('/config/edit', 'getConfigControllers@edit');
+$router->post('/config/edit', 'getConfigControllers@edit');
