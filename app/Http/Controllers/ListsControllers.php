@@ -21,7 +21,7 @@ class ListsControllers extends BaseController {
   
   public function lists($id_service_box = 1, $id_staff = 1)
   {
-    date_default_timezone_set("Asia/Bangkok");
+    // date_default_timezone_set("Asia/Bangkok");
     $lists_results = Lists::where('status', 1)->orderby('id', 'asc')->limit(1)->get();
     $temp_results = Temp::where('id_service_box', $id_service_box)->get();
     // return response()->json($lists_results);
