@@ -61,8 +61,8 @@ class ListsControllers extends BaseController {
   
   public function temp()
   {
-    $temp_results = Temp::where('id_service_box', $id_service_box)->get();
-    return response()->json($this->response);
+    $lists_results = Temp::orderby('id', 'desc')->get();
+    return response()->json($lists_results);
   }
 
   public function create(Request $request)
