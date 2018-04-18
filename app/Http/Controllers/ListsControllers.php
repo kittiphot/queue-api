@@ -65,10 +65,17 @@ class ListsControllers extends BaseController {
     return response()->json($lists_results);
   }
 
-  public function create(Request $request)
+  public function create()
   {
+    $result = Lists::orderby('id', 'desc')->limit(1)->get();
+    if ($result == '[]') {
+      $queue = 1;
+    }
+    else {
+      $queue = $result['0']['queue']+1;
+    }
     $result = new Lists;
-    $result->queue = $request->queue;
+    $result->queue = $queue;
     $result->status = 1;
     $result->create_time = date("Y-m-d h:i:s");
     $result->save();
