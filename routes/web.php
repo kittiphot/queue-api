@@ -19,12 +19,15 @@ $router->get('/key', function () use ($router) {
     return str_random(32);
 });
 
-$router->get('/list', 'ListsControllers@lists');
-$router->post('/list/create', 'ListsControllers@create');
+$router->get('/list', 'ListsControllers@list');
+$router->get('/list/edit', 'ListsControllers@edit');
+$router->get('/list/create', 'ListsControllers@create');
+
+$router->get('/temp', 'ListsControllers@temp');
+
 $router->post('/create-staff','StaffController@create');
 $router->put('/config/edit','ConfigControllers@edit');
 
-$router->get('/temp', 'ListsControllers@temp');
 
 // $router->get('/temp', 'TempControllers@find');
 
