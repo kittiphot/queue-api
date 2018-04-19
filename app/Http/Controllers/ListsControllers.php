@@ -18,51 +18,39 @@ class ListsControllers extends BaseController {
   }
 
   private $response = array('status' => 1, 'message' => 'success');
-  
-  public function lists($id_service_box = 1, $id_staff = 1)
+
+  public function list()
   {
-    // date_default_timezone_set("Asia/Bangkok");
-    $lists_results = Lists::where('status', 1)->orderby('id', 'asc')->limit(1)->get();
-    $temp_results = Temp::where('id_service_box', $id_service_box)->get();
-    // return response()->json($lists_results);
-    if ($temp_results == '[]') {
-      $temp_results = new Temp;
-      $temp_results->id_list = $lists_results['0']['id'];
-      $temp_results->queue = $lists_results['0']['queue'];
-      $temp_results->id_service_box = $id_service_box;
-      $temp_results->save();
-    }
-    else {
-      $temp_results = Temp::where('id_service_box', $id_service_box)->get();
-      $results = Lists::find($temp_results['0']['id_list']);
-      $results->end_time = date("Y-m-d h:i:s");
-      $results->save();
-      if ($lists_results == '[]') {
-        return response()->json($this->response);
-        // return response()->json($results);
-      }
-      Temp::where('id_service_box', $id_service_box)->delete();
-      $temp_results = new Temp;
-      $temp_results->id_list = $lists_results['0']['id'];
-      $temp_results->queue = $lists_results['0']['queue'];
-      $temp_results->id_service_box = $id_service_box;
-      $temp_results->save();
-    }
-    // return response()->json($lists_results);
-    $lists_results = Lists::find($temp_results->id_list);
-    $lists_results->id_service_box = $id_service_box;
-    $lists_results->id_staff = $id_staff;
-    $lists_results->call_time = date("Y-m-d h:i:s");
-    $lists_results->status = 0;
-    $lists_results->save();
-    // return response()->json($lists_results); 
-    return response()->json($this->response);
+    $results = Lists::all();
+    return response()->json($results);
   }
   
-  public function temp()
+  public function edit($id_service_box = 4, $id_staff = 1)
   {
-    $lists_results = Temp::orderby('id', 'desc')->get();
-    return response()->json($lists_results);
+    $lists = Lists::where('status', 1)->orderby('id', 'asc')->limit(1)->get();
+    $value = Temp::where('id_service_box', $id_service_box)->get();
+    if ($value == '[]') {
+      $value = $this->create_temp($lists, $id_service_box);
+    }
+    else {
+      $value = Temp::where('id_service_box', $id_service_box)->get();
+      if ($lists != '[]') {
+        Temp::where('id_service_box', $id_service_box)->delete();
+      }
+      $results = Lists::find($value['0']['id_list']);
+      if ($results->end_time == '0000-00-00 00:00:00') {
+        $results->end_time = date("Y-m-d h:i:s");
+        $results->save();
+      }
+      $value = $this->create_temp($lists, $id_service_box);
+    }
+    $results = Lists::find($value->id_list);
+    $results->id_service_box = $id_service_box;
+    $results->id_staff = $id_staff;
+    $results->call_time = date("Y-m-d h:i:s");
+    $results->status = 0;
+    $results->save();
+    return response()->json($this->response);
   }
 
   public function create()
@@ -80,6 +68,22 @@ class ListsControllers extends BaseController {
     $result->create_time = date("Y-m-d h:i:s");
     $result->save();
     return response()->json($this->response); 
+  }
+
+  public function temp()
+  {
+    $lists = Temp::orderby('id', 'desc')->get();
+    return response()->json($lists);
+  }
+
+  private function create_temp($lists, $id_service_box)
+  {
+    $temp = new Temp;
+    $temp->id_list = $lists['0']['id'];
+    $temp->queue = $lists['0']['queue'];
+    $temp->id_service_box = $id_service_box;
+    $temp->save();
+    return $temp;
   }
   
   // public function edit(Request $request) 
