@@ -34,6 +34,7 @@ $router->put('/config/edit','ConfigControllers@edit');
 
 /*------------------- Staff -------------------*/
 $router->get('/staff', 'StaffControllers@staff');
+$router->get('/staff/{id}','StaffControllers@find');
 $router->post('/staff/create', 'StaffControllers@create');
 $router->put('/staff/edit', 'StaffControllers@edit');
 $router->put('/staff/delete/{id}', 'StaffControllers@delete');

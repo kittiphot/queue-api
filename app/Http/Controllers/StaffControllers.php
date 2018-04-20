@@ -17,6 +17,12 @@ class StaffControllers extends BaseController
         return response()->json($results);
     }
     
+    public function find($id)
+    {
+        $results = staff::find($id);
+        return response()->json($results);
+    }
+    
     public function create(Request $request)
     {
         $results = new staff;
