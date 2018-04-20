@@ -1,9 +1,9 @@
 <?php
 
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 try {
-    (new Dotenv\Dotenv(__DIR__.'/../'))->load();
+    (new Dotenv\Dotenv(__DIR__ . '/../'))->load();
 } catch (Dotenv\Exception\InvalidPathException $e) {
     //
 }
@@ -17,15 +17,18 @@ try {
 | that serves as the central piece of this framework. We'll use this
 | application as an "IoC" container and router for this framework.
 |
-*/
+ */
 
 $app = new Laravel\Lumen\Application(
-    realpath(__DIR__.'/../')
+    realpath(__DIR__ . '/../')
 );
 
 $app->withFacades();
 
 $app->withEloquent();
+$app->configure('cors');
+
+$app->configure('cors');
 
 $app->configure('cors');
 
@@ -38,7 +41,7 @@ $app->configure('cors');
 | register the exception handler and the console kernel. You may add
 | your own bindings here if you like or you can make another file.
 |
-*/
+ */
 
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
@@ -59,16 +62,35 @@ $app->singleton(
 | be global middleware that run before and after each request into a
 | route or middleware that'll be assigned to some specific routes.
 |
-*/
+ */
 
+<<<<<<< HEAD
  $app->middleware([
 //    App\Http\Middleware\ExampleMiddleware::class
 \Barryvdh\Cors\HandleCors::class,
+=======
+$app->middleware([
+//    App\Http\Middleware\ExampleMiddleware::class
+<<<<<<< HEAD
+    
+\Barryvdh\Cors\HandleCors::class,
+ ]);
+
+ $app->routeMiddleware([
+     'auth' => App\Http\Middleware\Authenticate::class,
+     ]);
+=======
+    \Barryvdh\Cors\HandleCors::class,
+>>>>>>> 3880540797ac819fa3ed4237b9943eaf7cedd49b
 ]);
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
 ]);
+<<<<<<< HEAD
+=======
+>>>>>>> b06aa2aba6c360d5335e0d895199831319857874
+>>>>>>> 3880540797ac819fa3ed4237b9943eaf7cedd49b
 
 /*
 |--------------------------------------------------------------------------
@@ -79,9 +101,16 @@ $app->routeMiddleware([
 | are used to bind services into the container. Service providers are
 | totally optional, so you are not required to uncomment this line.
 |
+<<<<<<< HEAD
 */
 $app->register(Barryvdh\Cors\ServiceProvider::class);
 // $app->register(App\Providers\AppServiceProvider::class);
+=======
+ */
+
+$app->register(Barryvdh\Cors\ServiceProvider::class);
+//$app->register(App\Providers\AppServiceProvider::class);
+>>>>>>> b06aa2aba6c360d5335e0d895199831319857874
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
@@ -94,12 +123,12 @@ $app->register(Barryvdh\Cors\ServiceProvider::class);
 | the application. This will provide all of the URLs the application
 | can respond to, as well as the controllers that may handle them.
 |
-*/
+ */
 
 $app->router->group([
     'namespace' => 'App\Http\Controllers',
 ], function ($router) {
-    require __DIR__.'/../routes/web.php';
+    require __DIR__ . '/../routes/web.php';
 });
 
 return $app;
