@@ -19,6 +19,16 @@ class ServiceBoxControllers extends BaseController {
 
   private $response = array('status' => 1, 'message' => 'success');
   
+  public function get()
+  {
+      $results = ServiceBox::all();
+      return response()->json($results);
+  }
+  public function get_by_id($id)
+  {
+      $results = ServiceBox::find($id);
+      return response()->json($results);
+  }
   public function create(Request $request)
   {
     $result = new ServiceBox;

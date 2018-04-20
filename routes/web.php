@@ -19,6 +19,9 @@ $router->get('/key', function () use ($router) {
     return str_random(32);
 });
 
+$router->get('/list', 'ListsControllers@lists');
+$router->post('/list/create', 'ListsControllers@create');
+$router->get('/temp', 'ListsControllers@temp');
 $router->get('/date', 'DateTimeControllers@date');
 $router->get('/time', 'DateTimeControllers@time');
 
@@ -44,6 +47,8 @@ $router->post('/staff/create', 'StaffControllers@create');
 $router->post('/staff/edit', 'StaffControllers@edit');
 $router->put('/staff/delete/{id}', 'StaffControllers@delete');
 /*---------------------------------------------*/
+$router->get('/servicebox', 'ServiceBoxControllers@get');
+$router->get('/servicebox_by_id/{id:[0-9]+}', 'ServiceBoxControllers@get_by_id');
 $router->post('/servicebox/create', 'ServiceBoxControllers@create');
 $router->post('/servicebox/edit', 'ServiceBoxControllers@edit');
 $router->post('/servicebox/status-using', 'ServiceBoxControllers@status_using');
