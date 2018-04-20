@@ -24,6 +24,12 @@ class ListsControllers extends BaseController {
     $results = Lists::all();
     return response()->json($results);
   }
+
+  public function last_queue()
+  {
+    $result = Lists::orderby('id', 'desc')->limit(1)->get();
+    return response()->json($result);
+  }
   
   public function edit($id_service_box = 4, $id_staff = 1)
   {
@@ -39,7 +45,7 @@ class ListsControllers extends BaseController {
       }
       $results = Lists::find($value['0']['id_list']);
       if ($results->end_time == '0000-00-00 00:00:00') {
-        $results->end_time = date("Y-m-d h:i:s");
+        $results->end_time = date("Y-m-d H:i:s");
         $results->save();
       }
       $value = $this->create_temp($lists, $id_service_box);
@@ -47,7 +53,7 @@ class ListsControllers extends BaseController {
     $results = Lists::find($value->id_list);
     $results->id_service_box = $id_service_box;
     $results->id_staff = $id_staff;
-    $results->call_time = date("Y-m-d h:i:s");
+    $results->call_time = date("Y-m-d H:i:s");
     $results->status = 0;
     $results->save();
     return response()->json($this->response);
@@ -65,7 +71,7 @@ class ListsControllers extends BaseController {
     $result = new Lists;
     $result->queue = $queue;
     $result->status = 1;
-    $result->create_time = date("Y-m-d h:i:s");
+    $result->create_time = date("Y-m-d H:i:s");
     $result->save();
     return response()->json($this->response); 
   }

@@ -20,6 +20,7 @@ $router->get('/key', function () use ($router) {
 });
 
 $router->get('/list', 'ListsControllers@list');
+$router->get('/last', 'ListsControllers@last_queue');
 $router->get('/list/edit', 'ListsControllers@edit');
 $router->get('/list/create', 'ListsControllers@create');
 
