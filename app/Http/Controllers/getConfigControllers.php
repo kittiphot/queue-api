@@ -36,6 +36,23 @@ class getConfigControllers extends Controller
         $results ->status = $request->status;
         $results->save();
         return response()->json($this->response);
+
+
+        // $results = config::where('name', 'queue format')->get();
+        // $value= $results['0']['id'];
+        // $data = config::find($value);
+        // $data ->value = $request->format;
+        // $data ->status = 1;
+        // $data->save();
+
+        // $results2 = config::where('name', 'queue reset')->get();
+        // $value2= $results2['0']['id'];
+        // $data = config::find($value2);
+        // $data ->value = $request->reset;
+        // $data ->status = 1;
+        // $data->save();
+        // return response()->json($this->response);
+
     }
 
    
