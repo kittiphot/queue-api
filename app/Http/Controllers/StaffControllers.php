@@ -41,9 +41,9 @@ class StaffControllers extends BaseController
         return response()->json($this->response);
     }
 
-    public function delete($id) 
+    public function delete(Request $request) 
     {
-        $results = staff::find($id);
+        $results = staff::find($request->id);
         $results->status = 0;
         $results->save();
         return response()->json($this->response);

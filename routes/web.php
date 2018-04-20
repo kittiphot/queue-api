@@ -32,8 +32,10 @@ $router->get('/temp', 'ListsControllers@temp');
 $router->get('/staff', 'StaffControllers@staff');
 $router->post('/staff/create', 'StaffControllers@create');
 $router->put('/staff/edit', 'StaffControllers@edit');
-$router->put('/staff/delete/{id}', 'StaffControllers@delete');
+$router->put('/staff/delete', 'StaffControllers@delete');
 /*---------------------------------------------*/
+$router->get('/servicebox', 'ServiceBoxControllers@get');
+$router->get('/servicebox_by_id/{id:[0-9]+}', 'ServiceBoxControllers@get_by_id');
 $router->post('/servicebox/create', 'ServiceBoxControllers@create');
 $router->post('/servicebox/edit', 'ServiceBoxControllers@edit');
 $router->post('/servicebox/status-using', 'ServiceBoxControllers@status_using');
