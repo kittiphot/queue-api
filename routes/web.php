@@ -21,9 +21,6 @@ $router->get('/key', function () use ($router) {
 
 $router->get('/list', 'ListsControllers@lists');
 $router->post('/list/create', 'ListsControllers@create');
-$router->post('/create-staff','StaffController@create');
-$router->put('/config/edit','ConfigControllers@edit');
-
 $router->get('/temp', 'ListsControllers@temp');
 
 // $router->get('/temp', 'TempControllers@find');
@@ -32,7 +29,7 @@ $router->get('/temp', 'ListsControllers@temp');
 $router->get('/staff', 'StaffControllers@staff');
 $router->post('/staff/create', 'StaffControllers@create');
 $router->put('/staff/edit', 'StaffControllers@edit');
-$router->put('/staff/delete/{id}', 'StaffControllers@delete');
+$router->put('/staff/delete', 'StaffControllers@delete');
 /*---------------------------------------------*/
 $router->post('/servicebox/create', 'ServiceBoxControllers@create');
 $router->post('/servicebox/edit', 'ServiceBoxControllers@edit');
