@@ -19,6 +19,7 @@ class ListsControllers extends BaseController {
 
   private $response = array('status' => 1, 'message' => 'success');
 
+
   public function list()
   {
     $results = Lists::all();
