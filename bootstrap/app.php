@@ -31,6 +31,10 @@ $app->configure('cors');
 $app->configure('cors');
 
 $app->configure('cors');
+<<<<<<< HEAD
+=======
+
+>>>>>>> 00ae354d3c6256a445c79c9e41382c0f6e106ab1
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings
@@ -63,6 +67,11 @@ $app->singleton(
 |
  */
 
+<<<<<<< HEAD
+ $app->middleware([
+//    App\Http\Middleware\ExampleMiddleware::class
+\Barryvdh\Cors\HandleCors::class,
+=======
 $app->middleware([
 //    App\Http\Middleware\ExampleMiddleware::class
 
@@ -73,11 +82,25 @@ $app->middleware([
  $app->routeMiddleware([
      'auth' => App\Http\Middleware\Authenticate::class,
      ]);
+<<<<<<< HEAD
+=======
+=======
+    \Barryvdh\Cors\HandleCors::class,
+>>>>>>> 3880540797ac819fa3ed4237b9943eaf7cedd49b
+]);
+>>>>>>> 00ae354d3c6256a445c79c9e41382c0f6e106ab1
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
 ]);
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> b06aa2aba6c360d5335e0d895199831319857874
+>>>>>>> 3880540797ac819fa3ed4237b9943eaf7cedd49b
+>>>>>>> 00ae354d3c6256a445c79c9e41382c0f6e106ab1
 
 /*
 |--------------------------------------------------------------------------
