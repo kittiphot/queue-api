@@ -32,7 +32,7 @@ $router->get('/temp', 'ListsControllers@temp');
 $router->get('/staff', 'StaffControllers@staff');
 $router->post('/staff/create', 'StaffControllers@create');
 $router->put('/staff/edit', 'StaffControllers@edit');
-$router->put('/staff/delete/{id}', 'StaffControllers@delete');
+$router->put('/staff/delete', 'StaffControllers@delete');
 /*---------------------------------------------*/
 $router->post('/servicebox/create', 'ServiceBoxControllers@create');
 $router->post('/servicebox/edit', 'ServiceBoxControllers@edit');
