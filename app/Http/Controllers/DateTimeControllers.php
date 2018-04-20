@@ -11,7 +11,7 @@ class DateTimeControllers extends BaseController
 
   public function date()
   {
-    $results = date("Y/m/d");
+    $results = date("d/m/y");
     return response()->json($results);
   }
 

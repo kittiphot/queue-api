@@ -38,7 +38,7 @@ class ListsControllers extends BaseController {
     return response()->json($result);
   }
   
-  public function edit($id_service_box = 4, $id_staff = 1)
+  public function edit($id_service_box = 1, $id_staff = 1)
   {
     $lists = Lists::where('status', 1)->orderby('id', 'asc')->limit(1)->get();
     if ($lists != '[]') {

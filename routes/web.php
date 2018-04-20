@@ -44,14 +44,8 @@ $router->put('/config/edit','ConfigControllers@edit');
 $router->get('/staff', 'StaffControllers@staff');
 $router->get('/staff/{id}','StaffControllers@find');
 $router->post('/staff/create', 'StaffControllers@create');
-
-$router->put('/staff/edit', 'StaffControllers@edit');
-$router->put('/staff/delete', 'StaffControllers@delete');
-
-
 $router->post('/staff/edit', 'StaffControllers@edit');
 $router->put('/staff/delete/{id}', 'StaffControllers@delete');
-
 /*---------------------------------------------*/
 $router->get('/servicebox', 'ServiceBoxControllers@get');
 $router->get('/servicebox_by_id/{id:[0-9]+}', 'ServiceBoxControllers@get_by_id');
