@@ -36,13 +36,8 @@ $router->put('/config/edit','ConfigControllers@edit');
 $router->get('/staff', 'StaffControllers@staff');
 $router->get('/staff/{id}','StaffControllers@find');
 $router->post('/staff/create', 'StaffControllers@create');
-<<<<<<< HEAD
 $router->put('/staff/edit', 'StaffControllers@edit');
 $router->put('/staff/delete', 'StaffControllers@delete');
-=======
-$router->post('/staff/edit', 'StaffControllers@edit');
-$router->put('/staff/delete/{id}', 'StaffControllers@delete');
->>>>>>> b06aa2aba6c360d5335e0d895199831319857874
 /*---------------------------------------------*/
 $router->post('/servicebox/create', 'ServiceBoxControllers@create');
 $router->post('/servicebox/edit', 'ServiceBoxControllers@edit');
