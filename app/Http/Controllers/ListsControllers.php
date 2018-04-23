@@ -48,7 +48,6 @@ class ListsControllers extends BaseController {
   
   public function edit(Request $request)
   {
-
     $lists = Lists::where('status', 1)->orderby('id', 'asc')->limit(1)->get();
     if ($lists != '[]') {
       $value = Temp::where('id_service_box', $request->idServiceBox)->get();
@@ -79,20 +78,10 @@ class ListsControllers extends BaseController {
 
   public function create()
   {
-    $results2 = config::where('id', 2)->get();
-
-    $result = Lists::orderby('id', 'desc')->limit(1)->get();
-    if ($result == '[]'||$results2['0']['value']==1) {
-      $queue = 1;
-      if($results2['0']['value']==1){
-        $data = config::find($results2['0']['id']);
-        $data ->value = 0;
-        $data->save();
-      }
-    }
-    else {
-      $queue = $result['0']['queue']+1;
-    }
+    $results = config::find(2);
+    $queue = $results['value']+1;
+    $results->value = $queue;
+    $results->save();
     $result = new Lists;
     $result->queue = $queue;
     $result->status = 1;

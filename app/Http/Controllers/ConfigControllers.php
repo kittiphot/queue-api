@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
-class getConfigControllers extends Controller
+class ConfigControllers extends Controller
 {
     private $response = array('status' => 1, 'message' => 'success');
     public function Config()
@@ -36,24 +36,22 @@ class getConfigControllers extends Controller
         $results ->status = $request->status;
         $results->save();
         return response()->json($this->response);
-
-
-        // $results = config::where('name', 'queue format')->get();
-        // $value= $results['0']['id'];
-        // $data = config::find($value);
-        // $data ->value = $request->format;
-        // $data ->status = 1;
-        // $data->save();
-
-        // $results2 = config::where('name', 'queue reset')->get();
-        // $value2= $results2['0']['id'];
-        // $data = config::find($value2);
-        // $data ->value = $request->reset;
-        // $data ->status = 1;
-        // $data->save();
-        // return response()->json($this->response);
-
     }
 
-   
+    public function resetQueue()
+    {
+        $results = config::find(2);
+        $results ->value = 0;
+        $results->save();
+        return response()->json($this->response);
+    }
+
+    public function editQueueFormat(Request $request)
+    {
+        $results = config::find(1);
+        $results ->value = $request->queueFormat;
+        $results->save();
+        return response()->json($this->response);
+    }
+
 }

@@ -53,6 +53,9 @@ $router->post('/servicebox/create', 'ServiceBoxControllers@create');
 $router->post('/servicebox/edit', 'ServiceBoxControllers@edit');
 $router->post('/servicebox/status-using', 'ServiceBoxControllers@status_using');
 // $router->get('/temp', 'TempControllers@find');
-$router->get('/config', 'getConfigControllers@config');
-$router->post('/config/create', 'getConfigControllers@create');
-$router->post('/config/edit', 'getConfigControllers@edit');
+
+$router->get('/config', 'ConfigControllers@config');
+$router->post('/config/create', 'ConfigControllers@create');
+$router->post('/config/edit', 'ConfigControllers@edit');
+$router->get('/resetQueue', 'ConfigControllers@resetQueue');
+$router->post('/editQueueFormat', 'ConfigControllers@editQueueFormat');
