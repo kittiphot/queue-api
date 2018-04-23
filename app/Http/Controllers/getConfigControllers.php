@@ -23,36 +23,27 @@ class getConfigControllers extends Controller
         $results ->id = $request->id;
         $results ->name = $request->name;
         $results ->value = $request->value;
-        $results ->status = $request->status;
         $results ->save();
         return response()->json($this->response); 
     }
 
     public function edit(Request $request) 
     {
-        $results = config::find($request->id);
-        $results ->name = $request->name;
-        $results ->value = $request->value;
-        $results ->status = $request->status;
-        $results->save();
-        return response()->json($this->response);
-
-
-        // $results = config::where('name', 'queue format')->get();
-        // $value= $results['0']['id'];
-        // $data = config::find($value);
-        // $data ->value = $request->format;
-        // $data ->status = 1;
-        // $data->save();
-
-        // $results2 = config::where('name', 'queue reset')->get();
-        // $value2= $results2['0']['id'];
-        // $data = config::find($value2);
-        // $data ->value = $request->reset;
-        // $data ->status = 1;
-        // $data->save();
+        // $results = config::find($request->id);
+        // $results ->name = $request->name;
+        // $results ->value = $request->value;
+        // $results->save();
         // return response()->json($this->response);
+        $results = config::where('id', 1)->get();
+        $data = config::find($results['0']['id']);
+        $data ->value = $request->format;
+        $data->save();
 
+        $results = config::where('id',2)->get();
+        $data = config::find($results['0']['id']);
+        $data ->value = $request->reset;
+        $data->save();
+        return response()->json($this->response);
     }
 
    
