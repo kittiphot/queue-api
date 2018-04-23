@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Lists;
 use App\Models\Temp;
+use App\Models\config;
+
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
@@ -46,6 +48,7 @@ class ListsControllers extends BaseController {
   
   public function edit($id_service_box = 1, $id_staff = 1)
   {
+
     $lists = Lists::where('status', 1)->orderby('id', 'asc')->limit(1)->get();
     if ($lists != '[]') {
       $value = Temp::where('id_service_box', $id_service_box)->get();
@@ -76,9 +79,16 @@ class ListsControllers extends BaseController {
 
   public function create()
   {
+    $results2 = config::where('id', 2)->get();
+
     $result = Lists::orderby('id', 'desc')->limit(1)->get();
-    if ($result == '[]') {
+    if ($result == '[]'||$results2['0']['value']==1) {
       $queue = 1;
+      if($results2['0']['value']==1){
+        $data = config::find($results2['0']['id']);
+        $data ->value = 0;
+        $data->save();
+      }
     }
     else {
       $queue = $result['0']['queue']+1;
