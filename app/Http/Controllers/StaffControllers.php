@@ -26,12 +26,12 @@ class StaffControllers extends BaseController
     public function create(Request $request)
     {
         $results = new staff;
-        $results->name = $request->name;
-        $results->username = $request->username;
-        $results->password = $request->password;
-        $results->type = $request->type;
-        $results->status = $request->status;
-        $results->save();
+        $results ->name = $request->name;
+        $results ->username = $request->username;
+        $results ->password = $request->password;
+        $results ->type = $request->type;
+        $results ->status = 1;
+        $results ->save();
         return response()->json($this->response); 
     }
 

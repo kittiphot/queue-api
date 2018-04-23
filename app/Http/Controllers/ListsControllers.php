@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Lists;
 use App\Models\Temp;
+use App\Models\config;
+
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
@@ -18,6 +20,13 @@ class ListsControllers extends BaseController {
   }
 
   private $response = array('status' => 1, 'message' => 'success');
+
+  public function count_todo_queue_in_list()
+  {
+    $results = Lists::where('status',1)->count();
+    $result['count']=$results;
+    return response()->json($result);
+  }
 
   public function list()
   {
@@ -39,6 +48,7 @@ class ListsControllers extends BaseController {
   
   public function edit(Request $request)
   {
+
     $lists = Lists::where('status', 1)->orderby('id', 'asc')->limit(1)->get();
     if ($lists != '[]') {
       $value = Temp::where('id_service_box', $request->idServiceBox)->get();
@@ -69,9 +79,16 @@ class ListsControllers extends BaseController {
 
   public function create()
   {
+    $results2 = config::where('id', 2)->get();
+
     $result = Lists::orderby('id', 'desc')->limit(1)->get();
-    if ($result == '[]') {
+    if ($result == '[]'||$results2['0']['value']==1) {
       $queue = 1;
+      if($results2['0']['value']==1){
+        $data = config::find($results2['0']['id']);
+        $data ->value = 0;
+        $data->save();
+      }
     }
     else {
       $queue = $result['0']['queue']+1;

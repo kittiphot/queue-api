@@ -31,6 +31,7 @@ $router->get('/list/count', 'ListsControllers@list_count');
 $router->get('/last', 'ListsControllers@last_queue');
 
 $router->get('/temp', 'ListsControllers@temp');
+$router->get('/todo_temp', 'ListsControllers@count_todo_queue_in_list');
 $router->get('/temp/{id:[0-9]+}', 'ListsControllers@find_temp');
 
 $router->post('/create-staff','StaffController@create');
