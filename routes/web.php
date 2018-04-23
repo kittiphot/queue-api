@@ -33,6 +33,7 @@ $router->get('/list/create', 'ListsControllers@create');
 
 $router->get('/temp', 'ListsControllers@temp');
 $router->get('/temp/{id:[0-9]+}', 'ListsControllers@find_temp');
+$router->get('/temp/last', 'ListsControllers@last_temp');
 
 $router->post('/create-staff','StaffController@create');
 $router->put('/config/edit','ConfigControllers@edit');
@@ -56,3 +57,5 @@ $router->post('/servicebox/status-using', 'ServiceBoxControllers@status_using');
 $router->get('/config', 'getConfigControllers@config');
 $router->post('/config/create', 'getConfigControllers@create');
 $router->post('/config/edit', 'getConfigControllers@edit');
+
+$router->get('/queue/left/{queue}', 'ListsControllers@left_queue');

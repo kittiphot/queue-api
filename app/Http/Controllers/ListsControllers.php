@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Lists;
 use App\Models\Temp;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
 class ListsControllers extends BaseController {
@@ -111,6 +112,26 @@ class ListsControllers extends BaseController {
     return $temp;
   }
   
+  public function last_temp()
+  {
+    $lists = Temp::orderby('id', 'desc')->limit(1)->get();
+    return response()->json($lists);
+  }
+  
+  public function left_queue($queue)
+  {
+    $lists  = Lists::where('status', 1)->select('queue')->get();
+    $left = 0;
+    foreach ($lists as $value) {
+      if ($value['queue'] != $queue) {
+        $left = $left + 1;
+      }else{
+        break;
+      }
+    }
+    return response()->json($left);
+  }
+
   // public function edit(Request $request) 
   // {
   //   $results = NewsCategory::find($request->id);
