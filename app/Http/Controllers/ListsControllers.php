@@ -37,29 +37,29 @@ class ListsControllers extends BaseController {
     return response()->json($result);
   }
   
-  public function edit($id_service_box = 1, $id_staff = 1)
+  public function edit(Request $request)
   {
     $lists = Lists::where('status', 1)->orderby('id', 'asc')->limit(1)->get();
     if ($lists != '[]') {
-      $value = Temp::where('id_service_box', $id_service_box)->get();
+      $value = Temp::where('id_service_box', $request->idServiceBox)->get();
       if ($value == '[]') {
-        $value = $this->create_temp($lists, $id_service_box);
+        $value = $this->create_temp($lists, $request->idServiceBox);
       }
       else {
-        $value = Temp::where('id_service_box', $id_service_box)->get();
+        $value = Temp::where('id_service_box', $request->idServiceBox)->get();
         if ($lists != '[]') {
-          Temp::where('id_service_box', $id_service_box)->delete();
+          Temp::where('id_service_box', $request->idServiceBox)->delete();
         }
         $results = Lists::find($value['0']['id_list']);
         if ($results->end_time == '0000-00-00 00:00:00') {
           $results->end_time = date("Y-m-d H:i:s");
           $results->save();
         }
-        $value = $this->create_temp($lists, $id_service_box);
+        $value = $this->create_temp($lists, $request->idServiceBox);
       }
       $results = Lists::find($value->id_list);
-      $results->id_service_box = $id_service_box;
-      $results->id_staff = $id_staff;
+      $results->id_service_box = $request->idServiceBox;
+      $results->id_staff = $request->idStaff;
       $results->call_time = date("Y-m-d H:i:s");
       $results->status = 0;
       $results->save();
@@ -93,11 +93,13 @@ class ListsControllers extends BaseController {
   public function find_temp($id)
   {
     $result = Temp::where('id_service_box', $id)->get();
+    if ($result == '[]') {
+      $result['queue'] = "";
+      $result['call_time'] = "";
+      return response()->json($result);
+    }
     $result = Lists::find($result['0']['id_list']);
     $result['call_time'] = date("H:i:s", strtotime($result['call_time']));
-    // foreach ($result as $key => $value) {
-    //     $result[$key]['call_time'] = ;
-    // }
     return response()->json($result);
   }
 
