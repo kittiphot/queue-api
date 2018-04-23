@@ -26,8 +26,8 @@ $app = new Laravel\Lumen\Application(
 $app->withFacades();
 
 $app->withEloquent();
-$app->configure('cors');
 
+$app->configure('cors');
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings
@@ -61,7 +61,7 @@ $app->singleton(
  */
 
 $app->middleware([
-//    App\Http\Middleware\ExampleMiddleware::class
+    // App\Http\Middleware\ExampleMiddleware::class
     \Barryvdh\Cors\HandleCors::class,
 ]);
 
@@ -78,10 +78,10 @@ $app->routeMiddleware([
 | are used to bind services into the container. Service providers are
 | totally optional, so you are not required to uncomment this line.
 |
- */
+*/
 
 $app->register(Barryvdh\Cors\ServiceProvider::class);
-//$app->register(App\Providers\AppServiceProvider::class);
+// $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 

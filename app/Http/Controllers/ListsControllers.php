@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Lists;
 use App\Models\Temp;
+use App\Models\config;
+
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
@@ -19,9 +21,22 @@ class ListsControllers extends BaseController {
 
   private $response = array('status' => 1, 'message' => 'success');
 
+  public function count_todo_queue_in_list()
+  {
+    $results = Lists::where('status',1)->count();
+    $result['count']=$results;
+    return response()->json($result);
+  }
+
   public function list()
   {
     $results = Lists::all();
+    return response()->json($results);
+  }
+
+  public function list_count()
+  {
+    $results = Lists::where('status', 1)->count();
     return response()->json($results);
   }
 
@@ -31,43 +46,42 @@ class ListsControllers extends BaseController {
     return response()->json($result);
   }
   
-  public function edit($id_service_box = 4, $id_staff = 1)
+  public function edit(Request $request)
   {
     $lists = Lists::where('status', 1)->orderby('id', 'asc')->limit(1)->get();
-    $value = Temp::where('id_service_box', $id_service_box)->get();
-    if ($value == '[]') {
-      $value = $this->create_temp($lists, $id_service_box);
-    }
-    else {
-      $value = Temp::where('id_service_box', $id_service_box)->get();
-      if ($lists != '[]') {
-        Temp::where('id_service_box', $id_service_box)->delete();
+    if ($lists != '[]') {
+      $value = Temp::where('id_service_box', $request->idServiceBox)->get();
+      if ($value == '[]') {
+        $value = $this->create_temp($lists, $request->idServiceBox);
       }
-      $results = Lists::find($value['0']['id_list']);
-      if ($results->end_time == '0000-00-00 00:00:00') {
-        $results->end_time = date("Y-m-d H:i:s");
-        $results->save();
+      else {
+        $value = Temp::where('id_service_box', $request->idServiceBox)->get();
+        if ($lists != '[]') {
+          Temp::where('id_service_box', $request->idServiceBox)->delete();
+        }
+        $results = Lists::find($value['0']['id_list']);
+        if ($results->end_time == '0000-00-00 00:00:00') {
+          $results->end_time = date("Y-m-d H:i:s");
+          $results->save();
+        }
+        $value = $this->create_temp($lists, $request->idServiceBox);
       }
-      $value = $this->create_temp($lists, $id_service_box);
+      $results = Lists::find($value->id_list);
+      $results->id_service_box = $request->idServiceBox;
+      $results->id_staff = $request->idStaff;
+      $results->call_time = date("Y-m-d H:i:s");
+      $results->status = 0;
+      $results->save();
     }
-    $results = Lists::find($value->id_list);
-    $results->id_service_box = $id_service_box;
-    $results->id_staff = $id_staff;
-    $results->call_time = date("Y-m-d H:i:s");
-    $results->status = 0;
-    $results->save();
     return response()->json($this->response);
   }
 
   public function create()
   {
-    $result = Lists::orderby('id', 'desc')->limit(1)->get();
-    if ($result == '[]') {
-      $queue = 1;
-    }
-    else {
-      $queue = $result['0']['queue']+1;
-    }
+    $results = config::find(2);
+    $queue = $results['value']+1;
+    $results->value = $queue;
+    $results->save();
     $result = new Lists;
     $result->queue = $queue;
     $result->status = 1;
@@ -80,6 +94,19 @@ class ListsControllers extends BaseController {
   {
     $lists = Temp::orderby('id', 'desc')->get();
     return response()->json($lists);
+  }
+
+  public function find_temp($id)
+  {
+    $result = Temp::where('id_service_box', $id)->get();
+    if ($result == '[]') {
+      $result['queue'] = "";
+      $result['call_time'] = "";
+      return response()->json($result);
+    }
+    $result = Lists::find($result['0']['id_list']);
+    $result['call_time'] = date("H:i:s", strtotime($result['call_time']));
+    return response()->json($result);
   }
 
   private function create_temp($lists, $id_service_box)
