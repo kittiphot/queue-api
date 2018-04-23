@@ -19,19 +19,19 @@ $router->get('/key', function () use ($router) {
     return str_random(32);
 });
 
-$router->get('/list', 'ListsControllers@lists');
-$router->post('/list/create', 'ListsControllers@create');
-$router->get('/temp', 'ListsControllers@temp');
 $router->get('/date', 'DateTimeControllers@date');
 $router->get('/time', 'DateTimeControllers@time');
 
+$router->post('/authen', 'AuthenController@authen');
+
 $router->get('/list', 'ListsControllers@list');
+$router->get('/list/create', 'ListsControllers@create');
+$router->post('/list/edit', 'ListsControllers@edit');
 $router->get('/list/count', 'ListsControllers@list_count');
 $router->get('/last', 'ListsControllers@last_queue');
-$router->get('/list/edit', 'ListsControllers@edit');
-$router->get('/list/create', 'ListsControllers@create');
 
 $router->get('/temp', 'ListsControllers@temp');
+$router->get('/todo_temp', 'ListsControllers@count_todo_queue_in_list');
 $router->get('/temp/{id:[0-9]+}', 'ListsControllers@find_temp');
 $router->get('/temp/last', 'ListsControllers@last_temp');
 
@@ -54,8 +54,17 @@ $router->post('/servicebox/create', 'ServiceBoxControllers@create');
 $router->post('/servicebox/edit', 'ServiceBoxControllers@edit');
 $router->post('/servicebox/status-using', 'ServiceBoxControllers@status_using');
 // $router->get('/temp', 'TempControllers@find');
+<<<<<<< HEAD
 $router->get('/config', 'getConfigControllers@config');
 $router->post('/config/create', 'getConfigControllers@create');
 $router->post('/config/edit', 'getConfigControllers@edit');
 
 $router->get('/queue/left/{queue}', 'ListsControllers@left_queue');
+=======
+
+$router->get('/config', 'ConfigControllers@config');
+$router->post('/config/create', 'ConfigControllers@create');
+$router->post('/config/edit', 'ConfigControllers@edit');
+$router->get('/resetQueue', 'ConfigControllers@resetQueue');
+$router->post('/editQueueFormat', 'ConfigControllers@editQueueFormat');
+>>>>>>> c931664d535ca8eaf9a16f4846a974c7c94aee71
