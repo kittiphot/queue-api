@@ -19,6 +19,12 @@ class ListsControllers extends BaseController {
 
   private $response = array('status' => 1, 'message' => 'success');
 
+  public function count_todo_queue_in_list()
+  {
+    $results = Lists::where('status',1)->count();
+    $result['count']=$results;
+    return response()->json($result);
+  }
 
   public function list()
   {
