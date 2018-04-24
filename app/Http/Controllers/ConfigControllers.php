@@ -53,4 +53,37 @@ class ConfigControllers extends Controller
         return response()->json($this->response);
     }
 
+    public function settings()
+    {   
+        $results = config::where('id', '>=', 3)->get();
+        return response()->json($results);
+    }
+
+    public function settings_by_status()
+    {   
+        $results = config::where([
+            ['status', 1],
+            ['id', '>=', 3]
+        ])->get()->toArray();
+        return response()->json($results);
+    }
+
+    public function edit_settings(Request $request)
+    {   
+        $result = config::find(3);
+        $result->status = $request->statusLogo;
+        $result->save();
+        $result = config::find(4);
+        $result->status = $request->statusQR;
+        $result->save();
+        $result = config::find(5);
+        $result->status = $request->statusWait;
+        $result->save();
+        $result = config::find(6);
+        $result->value = $request->footerInput;
+        $result->status = $request->statusFooter;
+        $result->save();
+        return response()->json($this->response);
+    }
+
 }

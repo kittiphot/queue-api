@@ -42,7 +42,7 @@ class StaffControllers extends BaseController
         $results->username = $request->username;
         $results->password = $request->password;
         $results->type = $request->type;
-        $results->status = $request->status;
+        $results->status = 1;
         $results->save();
         return response()->json($this->response);
     }

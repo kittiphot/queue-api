@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Lists;
 use App\Models\Temp;
 use App\Models\config;
+use App\Models\ServiceBox;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -93,8 +94,13 @@ class ListsControllers extends BaseController {
 
   public function temp()
   {
-    $lists = Temp::orderby('id', 'desc')->get();
-    return response()->json($lists);
+    $results = Temp::orderby('id', 'desc')->get();
+    foreach ($results as $key => $value) {
+      $result = ServiceBox::find($value['id_service_box']);
+      $results[$key]['name'] = $result['name'];
+    }
+    // $lists = ServiceBox::find($lists['0']['id_service_box']);
+    return response()->json($results);
   }
 
   public function find_temp($id)
