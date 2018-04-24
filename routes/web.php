@@ -63,3 +63,5 @@ $router->post('/config/edit', 'ConfigControllers@edit');
 $router->get('/resetQueue', 'ConfigControllers@resetQueue');
 $router->post('/editQueueFormat', 'ConfigControllers@editQueueFormat');
 $router->get('/settings', 'ConfigControllers@settings');
+$router->get('/settings_by_status', 'ConfigControllers@settings_by_status');
+$router->post('/edit_settings', 'ConfigControllers@edit_settings');
