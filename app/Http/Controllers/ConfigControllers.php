@@ -53,4 +53,13 @@ class ConfigControllers extends Controller
         return response()->json($this->response);
     }
 
+    public function settings()
+    {   
+        $results = config::where([
+            ['status', 1],
+            ['id', '>=', 3]
+        ])->get();
+        return response()->json($results);
+    }
+
 }
