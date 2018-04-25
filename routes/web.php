@@ -23,6 +23,7 @@ $router->get('/date', 'DateTimeControllers@date');
 $router->get('/time', 'DateTimeControllers@time');
 
 $router->post('/authen', 'AuthenController@authen');
+$router->post('/logged', 'AuthenController@logged');
 
 $router->get('/list', 'ListsControllers@list');
 $router->get('/list/create', 'ListsControllers@create');
@@ -68,3 +69,5 @@ $router->post('/editQueueFormat', 'ConfigControllers@editQueueFormat');
 $router->get('/settings', 'ConfigControllers@settings');
 $router->get('/settings_by_status', 'ConfigControllers@settings_by_status');
 $router->post('/edit_settings', 'ConfigControllers@edit_settings');
+$router->get('/userScreen', 'ConfigControllers@userScreen');
+$router->post('/edit_userScreen', 'ConfigControllers@edit_userScreen');

@@ -50,28 +50,15 @@ class ConfigControllers extends Controller
         $results = config::find(1);
         $results ->value = $request->queueFormat;
         $results->save();
-<<<<<<< HEAD
-        // $results = config::find($request->id);
-        // $results ->name = $request->name;
-        // $results ->value = $request->value;
-        // $results->save();
-        // return response()->json($this->response);
-        $results = config::where('id', 1)->get();
-        $data = config::find($results['0']['id']);
-        $data ->value = $request->format;
-        $data->save();
-
-        $results = config::where('id',2)->get();
-        $data = config::find($results['0']['id']);
-        $data ->value = $request->reset;
-        $data->save();
-=======
         return response()->json($this->response);
     }
 
     public function settings()
     {   
-        $results = config::where('id', '>=', 3)->get();
+        $results = config::where([
+            ['id', '>=', 3],
+            ['id', '<=', 6]        
+        ])->get();
         return response()->json($results);
     }
 
@@ -79,8 +66,9 @@ class ConfigControllers extends Controller
     {   
         $results = config::where([
             ['status', 1],
-            ['id', '>=', 3]
-        ])->get()->toArray();
+            ['id', '>=', 3],
+            ['id', '<=', 6]
+        ])->get();
         return response()->json($results);
     }
 
@@ -99,7 +87,20 @@ class ConfigControllers extends Controller
         $result->value = $request->footerInput;
         $result->status = $request->statusFooter;
         $result->save();
->>>>>>> 088d7abb7ecb67115dda695c98136fe0f829d663
+        return response()->json($this->response);
+    }
+
+    public function userScreen()
+    {   
+        $result = config::find(7);
+        return response()->json($result);
+    }
+
+    public function edit_userScreen(Request $request)
+    {   
+        $result = config::find(7);
+        $result->value = $request->value;
+        $result->save();
         return response()->json($this->response);
     }
 
