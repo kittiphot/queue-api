@@ -55,7 +55,10 @@ class ConfigControllers extends Controller
 
     public function settings()
     {   
-        $results = config::where('id', '>=', 3)->get();
+        $results = config::where([
+            ['id', '>=', 3],
+            ['id', '<=', 6]        
+        ])->get();
         return response()->json($results);
     }
 
@@ -63,8 +66,9 @@ class ConfigControllers extends Controller
     {   
         $results = config::where([
             ['status', 1],
-            ['id', '>=', 3]
-        ])->get()->toArray();
+            ['id', '>=', 3],
+            ['id', '<=', 6]
+        ])->get();
         return response()->json($results);
     }
 
@@ -82,6 +86,23 @@ class ConfigControllers extends Controller
         $result = config::find(6);
         $result->value = $request->footerInput;
         $result->status = $request->statusFooter;
+        $result->save();
+        return response()->json($this->response);
+    }
+
+    public function userScreen()
+    {   
+        $result = config::find(7);
+        return response()->json($result);
+    }
+
+    public function edit_Screen(Request $request)
+    {   
+        $result = config::find(7);
+        $result->value = $request->userScreen;
+        $result->save();
+        $result = config::find(8);
+        $result->value = $request->pushQueueScreen;
         $result->save();
         return response()->json($this->response);
     }

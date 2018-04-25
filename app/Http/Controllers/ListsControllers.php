@@ -162,5 +162,21 @@ class ListsControllers extends BaseController {
   //   $results->save();
   //   return response()->json($this->response);
   // }
+    public function get_all_list_queue_today()
+    {
+      $result = Lists::all();
 
+      foreach($result as $key=>$value)
+      {      
+         $current_date=(date('Y-m-d'));
+        //  $current_date=$request->create_time;
+          if($current_date==date("Y-m-d", strtotime($value['create_time'])) )
+          {
+              $result2[$key]['mo']='m';
+          }    
+      }
+      $count_date['count_list_today']=count($result2);
+
+      return response()->json($count_date);
+    }
 }

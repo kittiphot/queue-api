@@ -20,7 +20,7 @@ class ServiceBoxControllers extends BaseController {
   private $response = array('status' => 1, 'message' => 'success');
   
   public function get()
-  {
+  {  
       $results = ServiceBox::all();
       return response()->json($results);
   }
