@@ -96,10 +96,13 @@ class ConfigControllers extends Controller
         return response()->json($result);
     }
 
-    public function edit_userScreen(Request $request)
+    public function edit_Screen(Request $request)
     {   
         $result = config::find(7);
-        $result->value = $request->value;
+        $result->value = $request->userScreen;
+        $result->save();
+        $result = config::find(8);
+        $result->value = $request->pushQueueScreen;
         $result->save();
         return response()->json($this->response);
     }
