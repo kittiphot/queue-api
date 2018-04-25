@@ -23,6 +23,7 @@ $router->get('/date', 'DateTimeControllers@date');
 $router->get('/time', 'DateTimeControllers@time');
 
 $router->post('/authen', 'AuthenController@authen');
+$router->post('/logged', 'AuthenController@logged');
 
 $router->get('/list', 'ListsControllers@list');
 $router->get('/list/create', 'ListsControllers@create');

@@ -18,6 +18,8 @@ class AuthenController extends BaseController
     //
   }
 
+  private $response = array('status' => 1, 'message' => 'success');
+
   public function authen(Request $request)
   {
     $username = $request->username;
@@ -26,15 +28,15 @@ class AuthenController extends BaseController
       ['username', $username],
       ['password', $password]
     ])->get();
-
     return response()->json($result);
   }
 
-  private function chk_loged(Request $request)
+  public function logged(Request $request)
   {
-      $results = Staff::find($request->id);
-      $results->loged = $request->loged;
-      save();
+    $result = Staff::find($request->id);
+    $result->logged = $request->logged;
+    $result->save();
+    return response()->json($this->response); 
   }
 
 }
