@@ -50,22 +50,6 @@ class ConfigControllers extends Controller
         $results = config::find(1);
         $results ->value = $request->queueFormat;
         $results->save();
-<<<<<<< HEAD
-        // $results = config::find($request->id);
-        // $results ->name = $request->name;
-        // $results ->value = $request->value;
-        // $results->save();
-        // return response()->json($this->response);
-        $results = config::where('id', 1)->get();
-        $data = config::find($results['0']['id']);
-        $data ->value = $request->format;
-        $data->save();
-
-        $results = config::where('id',2)->get();
-        $data = config::find($results['0']['id']);
-        $data ->value = $request->reset;
-        $data->save();
-=======
         return response()->json($this->response);
     }
 
@@ -99,7 +83,6 @@ class ConfigControllers extends Controller
         $result->value = $request->footerInput;
         $result->status = $request->statusFooter;
         $result->save();
->>>>>>> 088d7abb7ecb67115dda695c98136fe0f829d663
         return response()->json($this->response);
     }
 
