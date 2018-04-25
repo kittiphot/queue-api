@@ -179,4 +179,37 @@ class ListsControllers extends BaseController {
 
       return response()->json($count_date);
     }
+    public function get_count_queue_in_hour()
+    {        
+      $result = Lists::all();
+
+      foreach($result as $key=>$value)
+      { 
+         $time=date("H", strtotime($value['call_time']));
+          if($time=='01'){$time=$time+7;$result8[$key]['time_08']=$time;}
+          else if($time=='02'){$time=$time+7;$result9[$key]['time_09']=$time;}
+          else if($time=='03'){$time=$time+7;$result10[$key]['time_10']=$time;}
+          else if($time=='04'){$time=$time+7;$result11[$key]['time_11']=$time;}
+          else if($time=='05'){$time=$time+7;$result12[$key]['time_12']=$time;}
+          else if($time=='06'){$time=$time+7;$result13[$key]['time_13']=$time;}
+          else if($time=='07'){$time=$time+7;$result14[$key]['time_14']=$time;}
+          else if($time=='08'){$time=$time+7;$result15[$key]['time_15']=$time;}
+          else if($time=='09'){$time=$time+7;$result16[$key]['time_16']=$time;}
+          else if($time=='10'){$time=$time+7;$result17[$key]['time_17']=$time;}
+          // }    
+      }
+      $count_time['time_08']=count($result8);
+      $count_time['time_09']=count($result9);
+      $count_time['time_10']=count($result10);
+      $count_time['time_11']=count($result11);
+      $count_time['time_12']=count($result12);
+      $count_time['time_13']=count($result13);
+      $count_time['time_14']=count($result14);
+      $count_time['time_15']=count($result15);
+      $count_time['time_16']=count($result16);
+      $count_time['time_17']=count($result17);
+
+      return response()->json($count_time);
+    }
+
 }
