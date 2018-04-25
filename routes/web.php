@@ -71,4 +71,4 @@ $router->get('/settings', 'ConfigControllers@settings');
 $router->get('/settings_by_status', 'ConfigControllers@settings_by_status');
 $router->post('/edit_settings', 'ConfigControllers@edit_settings');
 $router->get('/userScreen', 'ConfigControllers@userScreen');
-$router->post('/edit_userScreen', 'ConfigControllers@edit_userScreen');
+$router->post('/edit_Screen', 'ConfigControllers@edit_Screen');
