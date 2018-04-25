@@ -29,7 +29,6 @@ class ConfigControllers extends Controller
 
     public function edit(Request $request) 
     {
-<<<<<<< HEAD:app/Http/Controllers/ConfigControllers.php
         $results = config::find($request->id);
         $results ->name = $request->name;
         $results ->value = $request->value;
@@ -51,7 +50,6 @@ class ConfigControllers extends Controller
         $results = config::find(1);
         $results ->value = $request->queueFormat;
         $results->save();
-=======
         // $results = config::find($request->id);
         // $results ->name = $request->name;
         // $results ->value = $request->value;
@@ -66,7 +64,6 @@ class ConfigControllers extends Controller
         $data = config::find($results['0']['id']);
         $data ->value = $request->reset;
         $data->save();
->>>>>>> 5d327ecea7451e881b6f21625b1d823587416ae8:app/Http/Controllers/getConfigControllers.php
         return response()->json($this->response);
     }
 

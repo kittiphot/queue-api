@@ -26,13 +26,15 @@ class AuthenController extends BaseController
       ['username', $username],
       ['password', $password]
     ])->get();
+
     return response()->json($result);
   }
 
-  private function get_person_profile($person_id)
+  private function chk_loged(Request $request)
   {
-    $result = Person::find($person_id);
-    return $result;
+      $results = Staff::find($request->id);
+      $results->loged = $request->loged;
+      save();
   }
 
 }
