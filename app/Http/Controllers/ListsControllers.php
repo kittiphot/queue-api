@@ -175,7 +175,7 @@ class ListsControllers extends BaseController {
               $result2[$key]['mo']='m';
           }    
       }
-      $count_date[' ']=count($result2);
+      $count_date['count_list_today']=count($result2);
 
       return response()->json($count_date);
     }
