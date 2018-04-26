@@ -34,6 +34,7 @@ $router->get('/last', 'ListsControllers@last_queue');
 $router->get('/temp', 'ListsControllers@temp');
 $router->get('/todo_temp', 'ListsControllers@count_todo_queue_in_list');
 $router->get('/temp/{id:[0-9]+}', 'ListsControllers@find_temp');
+$router->get('/temp/repeat/{id:[0-9]+}', 'ListsControllers@repeat_temp');
 $router->get('/temp/last', 'ListsControllers@last_temp');
 
 $router->post('/create-staff','StaffController@create');
@@ -55,7 +56,7 @@ $router->get('/servicebox', 'ServiceBoxControllers@get');
 $router->get('/servicebox_by_id/{id:[0-9]+}', 'ServiceBoxControllers@get_by_id');
 $router->post('/servicebox/create', 'ServiceBoxControllers@create');
 $router->post('/servicebox/edit', 'ServiceBoxControllers@edit');
-$router->post('/servicebox/status-using', 'ServiceBoxControllers@status_using');
+$router->delete('/servicebox/delete/{id:[0-9]+}', 'ServiceBoxControllers@status_using');
 // $router->get('/temp', 'TempControllers@find');
 $router->get('/config', 'getConfigControllers@config');
 $router->post('/config/create', 'getConfigControllers@create');

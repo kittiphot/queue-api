@@ -57,7 +57,7 @@ class ListsControllers extends BaseController {
         $value = $this->create_temp($lists, $request->idServiceBox);
       }
       else {
-        $value = Temp::where('id_service_box', $request->idServiceBox)->get();
+        // $value = Temp::where('id_service_box', $request->idServiceBox)->get();
         if ($lists != '[]') {
           Temp::where('id_service_box', $request->idServiceBox)->delete();
         }
@@ -74,6 +74,8 @@ class ListsControllers extends BaseController {
       $results->call_time = date("Y-m-d H:i:s");
       $results->status = 0;
       $results->save();
+      $this->response['message'] = "call";
+      $this->response['queue'] = $results->queue;
     }
     return response()->json($this->response);
   }
@@ -114,6 +116,24 @@ class ListsControllers extends BaseController {
     $result = Lists::find($result['0']['id_list']);
     $result['call_time'] = date("H:i:s", strtotime($result['call_time']));
     return response()->json($result);
+  }
+
+  public function repeat_temp($id)
+  {
+    $result = Temp::where('id_service_box', $id)->get();
+    Temp::where('id_service_box', $id)->delete();
+    $results = new Temp;
+    $results->id_list = $result['0']['id_list'];
+    $results->queue = $result['0']['queue'];
+    $results->id_service_box = $id;
+    $results->save();
+    $results = Lists::find($results->id_list);
+    $results->call_time = date("Y-m-d H:i:s");
+    $results->save();
+    // return response()->json($results);
+    $this->response['message'] = "repeat";
+    $this->response['queue'] = $results->queue;
+    return response()->json($this->response);
   }
 
   private function create_temp($lists, $id_service_box)
