@@ -21,14 +21,16 @@ class ServiceBoxControllers extends BaseController {
   
   public function get()
   {  
-      $results = ServiceBox::all();
+      $results = ServiceBox::where('status', 1)->get();
       return response()->json($results);
   }
+  
   public function get_by_id($id)
   {
       $results = ServiceBox::find($id);
       return response()->json($results);
   }
+
   public function create(Request $request)
   {
     $result = new ServiceBox;
@@ -37,6 +39,7 @@ class ServiceBoxControllers extends BaseController {
     $result->save();
     return response()->json($this->response); 
   }
+
   public function edit(Request $request)
   {
     $results = ServiceBox::find($request->id);
@@ -45,10 +48,11 @@ class ServiceBoxControllers extends BaseController {
     $results->save();
     return response()->json($this->response);
   }
-  public function status_using(Request $request)
+
+  public function status_using($id)
   {
-    $results = ServiceBox::find($request->id);
-    $results->status = $request->status;
+    $results = ServiceBox::find($id);
+    $results->status = 0;
     $results->save();
     return response()->json($this->response);
   }
