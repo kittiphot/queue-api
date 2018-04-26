@@ -199,4 +199,158 @@ class ListsControllers extends BaseController {
 
       return response()->json($count_date);
     }
+    public function get_count_queue_in_hour()
+    {        
+      $result = Lists::all();
+      $result16=[];
+      $result9=[];
+      $result10=[];
+      $result11=[];
+      $result12=[];
+      $result13=[];
+      $result14=[];
+      $result15=[];
+      $result16=[];
+      $result17=[];
+      foreach($result as $key=>$value)
+      { 
+         $time=date("H", strtotime($value['call_time']));
+          if($time=='01'){$time=$time+7;$result8[$key]['time_08']=$time;}
+          else if($time=='02'){$time=$time+7;$result9[$key]['time_09']=$time;}
+          else if($time=='03'){$time=$time+7;$result10[$key]['time_10']=$time;}
+          else if($time=='04'){$time=$time+7;$result11[$key]['time_11']=$time;}
+          else if($time=='05'){$time=$time+7;$result12[$key]['time_12']=$time;}
+          else if($time=='06'){$time=$time+7;$result13[$key]['time_13']=$time;}
+          else if($time=='07'){$time=$time+7;$result14[$key]['time_14']=$time;}
+          else if($time=='08'){$time=$time+7;$result15[$key]['time_15']=$time;}
+          else if($time=='09'){$time=$time+7;$result16[$key]['time_16']=$time;}
+          else if($time=='10'){$time=$time+7;$result17[$key]['time_17']=$time;}
+          // }    
+      }
+      $count_time['time_08']=count($result8);
+      $count_time['time_09']=count($result9);
+      $count_time['time_10']=count($result10);
+      $count_time['time_11']=count($result11);
+      $count_time['time_12']=count($result12);
+      $count_time['time_13']=count($result13);
+      $count_time['time_14']=count($result14);
+      $count_time['time_15']=count($result15);
+      $count_time['time_16']=count($result16);
+      $count_time['time_17']=count($result17);
+
+      return response()->json($count_time);
+    }
+    public function get_count_queue_day_in_month()
+    {
+        $result = Lists::all();
+        $current_month=(date('m'));
+        $result1=[];
+        $result2=[];
+        $result3=[];
+        $result4=[];
+        $result5=[];
+        $result6=[];
+        $result7=[];
+        $result8=[];
+        $result9=[];
+        $result10=[];
+        $result11=[];
+        $result12=[];
+        $result13=[];
+        $result14=[];
+        $result15=[];
+        $result16=[];
+        $result17=[];
+        $result18=[];
+        $result19=[];
+        $result20=[];
+        $result21=[];
+        $result22=[];
+        $result23=[];
+        $result24=[];
+        $result25=[];
+        $result26=[];
+        $result27=[];
+        $result28=[];
+        $result29=[];
+        $result30=[];
+        $result31=[];
+        foreach($result as $key=>$value)
+        {
+        if($current_month==date("m", strtotime($value['call_time'])) )
+          {
+            if(date("d", strtotime($value['call_time']))=='01'){$result1[$key]['day_01']="n";}
+            if(date("d", strtotime($value['call_time']))=='02'){$result2[$key]['day_02']="n";}
+            if(date("d", strtotime($value['call_time']))=='03'){$result3[$key]['day_03']="n";}
+            if(date("d", strtotime($value['call_time']))=='04'){$result4[$key]['day_04']="n";}
+            if(date("d", strtotime($value['call_time']))=='05'){$result5[$key]['day_05']="n";}
+            if(date("d", strtotime($value['call_time']))=='06'){$result6[$key]['day_06']="n";}
+            if(date("d", strtotime($value['call_time']))=='07'){$result7[$key]['day_07']="n";}
+            if(date("d", strtotime($value['call_time']))=='08'){$result8[$key]['day_08']="n";}
+            if(date("d", strtotime($value['call_time']))=='09'){$result9[$key]['day_09']="n";}
+            if(date("d", strtotime($value['call_time']))=='10'){$result10[$key]['day_10']="n";}
+            if(date("d", strtotime($value['call_time']))=='11'){$result11[$key]['day_11']="n";}
+            if(date("d", strtotime($value['call_time']))=='12'){$result12[$key]['day_12']="n";}
+            if(date("d", strtotime($value['call_time']))=='13'){$result13[$key]['day_13']="n";}
+            if(date("d", strtotime($value['call_time']))=='14'){$result14[$key]['day_14']="n";}
+            if(date("d", strtotime($value['call_time']))=='15'){$result15[$key]['day_15']="n";}
+            if(date("d", strtotime($value['call_time']))=='16'){$result16[$key]['day_16']="n";}
+            if(date("d", strtotime($value['call_time']))=='17'){$result17[$key]['day_17']="n";}
+            if(date("d", strtotime($value['call_time']))=='18'){$result18[$key]['day_18']="n";}
+            if(date("d", strtotime($value['call_time']))=='19'){$result19[$key]['day_19']="n";}
+            if(date("d", strtotime($value['call_time']))=='20'){$result20[$key]['day_20']="n";}
+            if(date("d", strtotime($value['call_time']))=='21'){$result21[$key]['day_21']="n";}
+            if(date("d", strtotime($value['call_time']))=='22'){$result22[$key]['day_22']="n";}
+            if(date("d", strtotime($value['call_time']))=='23'){$result23[$key]['day_23']="n";}
+            if(date("d", strtotime($value['call_time']))=='24'){$result24[$key]['day_24']="n";}
+            if(date("d", strtotime($value['call_time']))=='25'){$result25[$key]['day_25']="n";}
+            if(date("d", strtotime($value['call_time']))=='26'){$result26[$key]['day_26']="n";}
+            if(date("d", strtotime($value['call_time']))=='27'){$result27[$key]['day_27']="n";}
+            if(date("d", strtotime($value['call_time']))=='28'){$result28[$key]['day_28']="n";}
+            if(date("d", strtotime($value['call_time']))=='29'){$result29[$key]['day_29']="n";}
+            if(date("d", strtotime($value['call_time']))=='30'){$result30[$key]['day_30']="n";}
+            if(date("d", strtotime($value['call_time']))=='30'){$result31[$key]['day_31']="n";}
+            
+          }  
+        }
+        $count_time['day_01']=count($result1);
+        $count_time['day_02']=count($result2);
+        $count_time['day_03']=count($result3);
+        $count_time['day_04']=count($result4);
+        $count_time['day_05']=count($result5);
+        $count_time['day_06']=count($result6);
+        $count_time['day_07']=count($result7);
+        $count_time['day_08']=count($result8);
+        $count_time['day_09']=count($result9);
+        $count_time['day_10']=count($result10);
+
+        $count_time['day_11']=count($result11);
+        $count_time['day_12']=count($result12);
+        $count_time['day_13']=count($result13);
+        $count_time['day_14']=count($result14);
+        $count_time['day_15']=count($result15);
+        $count_time['day_16']=count($result16);
+        $count_time['day_17']=count($result17);
+        $count_time['day_18']=count($result18);
+        $count_time['day_19']=count($result19);
+        $count_time['day_20']=count($result20);
+
+        $count_time['day_21']=count($result21);
+        $count_time['day_22']=count($result22);
+        $count_time['day_23']=count($result23);
+        $count_time['day_24']=count($result24);
+        $count_time['day_25']=count($result25);
+        $count_time['day_26']=count($result26);
+        $count_time['day_27']=count($result27);
+        $count_time['day_28']=count($result28);
+        $count_time['day_29']=count($result29);
+        $count_time['day_30']=count($result30);
+        $count_time['day_31']=count($result31);
+    
+          // $count_date[date("d", strtotime($value['call_time']))]=count($result2);
+   
+          
+
+      return response()->json($count_time);
+    }
 }

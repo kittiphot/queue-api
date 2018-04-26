@@ -41,6 +41,8 @@ $router->post('/create-staff','StaffController@create');
 $router->put('/config/edit','ConfigControllers@edit');
 
 $router->get('/all_queue_today', 'ListsControllers@get_all_list_queue_today');
+$router->get('/queue_in_hour', 'ListsControllers@get_count_queue_in_hour');
+$router->get('/queue_day_in_month', 'ListsControllers@get_count_queue_day_in_month');
 // $router->get('/temp', 'TempControllers@find');
 
 /*------------------- Staff -------------------*/
