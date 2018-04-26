@@ -96,6 +96,12 @@ class ConfigControllers extends Controller
         return response()->json($result);
     }
 
+    public function screen()
+    {   
+        $result = config::find(8);
+        return response()->json($result);
+    }
+
     public function edit_Screen(Request $request)
     {   
         $result = config::find(7);
