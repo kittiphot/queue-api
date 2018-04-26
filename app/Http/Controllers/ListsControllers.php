@@ -350,7 +350,6 @@ class ListsControllers extends BaseController {
           // $count_date[date("d", strtotime($value['call_time']))]=count($result2);
    
           
-
       return response()->json($count_time);
     }
 }
