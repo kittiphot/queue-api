@@ -38,7 +38,6 @@ $router->get('/temp/repeat/{id:[0-9]+}', 'ListsControllers@repeat_temp');
 $router->get('/temp/last', 'ListsControllers@last_temp');
 
 $router->post('/create-staff','StaffController@create');
-$router->put('/config/edit','ConfigControllers@edit');
 
 $router->get('/all_queue_today', 'ListsControllers@get_all_list_queue_today');
 $router->get('/queue_in_hour', 'ListsControllers@get_count_queue_in_hour');
@@ -58,15 +57,10 @@ $router->post('/servicebox/create', 'ServiceBoxControllers@create');
 $router->post('/servicebox/edit', 'ServiceBoxControllers@edit');
 $router->delete('/servicebox/delete/{id:[0-9]+}', 'ServiceBoxControllers@status_using');
 // $router->get('/temp', 'TempControllers@find');
-$router->get('/config', 'getConfigControllers@config');
-$router->post('/config/create', 'getConfigControllers@create');
-$router->post('/config/edit', 'getConfigControllers@edit');
 
 $router->get('/queue/left/{queue}', 'ListsControllers@left_queue');
 
 $router->get('/config', 'ConfigControllers@config');
-$router->post('/config/create', 'ConfigControllers@create');
-$router->post('/config/edit', 'ConfigControllers@edit');
 $router->get('/resetQueue', 'ConfigControllers@resetQueue');
 $router->post('/editQueueFormat', 'ConfigControllers@editQueueFormat');
 $router->get('/settings', 'ConfigControllers@settings');

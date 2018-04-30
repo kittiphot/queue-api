@@ -17,26 +17,6 @@ class ConfigControllers extends Controller
         return response()->json($results);
     }
 
-    public function create(Request $request)
-    {
-        $results = new config;
-        $results ->id = $request->id;
-        $results ->name = $request->name;
-        $results ->value = $request->value;
-        $results ->save();
-        return response()->json($this->response); 
-    }
-
-    public function edit(Request $request) 
-    {
-        $results = config::find($request->id);
-        $results ->name = $request->name;
-        $results ->value = $request->value;
-        $results ->status = $request->status;
-        $results->save();
-        return response()->json($this->response);
-    }
-
     public function resetQueue()
     {
         $results = config::find(2);
