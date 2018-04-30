@@ -42,10 +42,11 @@ class ListsControllers extends BaseController {
     return response()->json($results);
   }
 
-  public function last_queue()
+  public function next_queue()
   {
     $result = Lists::orderby('id', 'desc')->limit(1)->get();
-    return response()->json($result);
+    $result['0']['queue'] = $result['0']['queue']+1;
+    return response()->json($result['0']['queue']);
   }
   
   public function edit(Request $request)
