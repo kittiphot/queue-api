@@ -42,12 +42,19 @@ class ListsControllers extends BaseController {
     return response()->json($results);
   }
 
-  public function next_queue()
+  public function nextQueue()
   {
     $result = Lists::orderby('id', 'desc')->limit(1)->get();
     $result['0']['queue'] = $result['0']['queue']+1;
     return response()->json($result['0']['queue']);
   }
+
+  public function currentQueue()
+  {
+    $result = Lists::where('status', 1)->orderby('id', 'asc')->limit(1)->get();
+    $result['0']['queue'] = $result['0']['queue']-1;
+    return response()->json($result['0']['queue']);
+  }  
   
   public function edit(Request $request)
   {

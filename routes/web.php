@@ -29,7 +29,8 @@ $router->get('/list', 'ListsControllers@list');
 $router->get('/list/create', 'ListsControllers@create');
 $router->post('/list/edit', 'ListsControllers@edit');
 $router->get('/list/count', 'ListsControllers@list_count');
-$router->get('/nextQueue', 'ListsControllers@next_queue');
+$router->get('/nextQueue', 'ListsControllers@nextQueue');
+$router->get('/currentQueue', 'ListsControllers@currentQueue');
 
 $router->get('/temp', 'ListsControllers@temp');
 $router->get('/todo_temp', 'ListsControllers@count_todo_queue_in_list');
