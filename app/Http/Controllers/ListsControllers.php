@@ -115,14 +115,17 @@ class ListsControllers extends BaseController {
 
   public function find_temp($id)
   {
+    $config = config::where('id', 1)->select('value')->get();
     $result = Temp::where('id_service_box', $id)->get();
     if ($result == '[]') {
       $result['queue'] = "";
       $result['call_time'] = "";
+      $result['format'] = "";
       return response()->json($result);
     }
     $result = Lists::find($result['0']['id_list']);
     $result['call_time'] = date("H:i:s", strtotime($result['call_time']));
+    $result['format'] = $config['0']['value'];
     return response()->json($result);
   }
 
@@ -162,13 +165,21 @@ class ListsControllers extends BaseController {
   
   public function left_queue($queue)
   {
-    $lists  = Lists::where('status', 1)->select('queue')->get();
     $left = 0;
-    foreach ($lists as $value) {
-      if ($value['queue'] != $queue) {
-        $left = $left + 1;
-      }else{
-        break;
+    $check = Lists::where('queue', $queue)->select('queue','status')->get();
+    if($check['0']['status'] == 1)
+    {
+      $lists = Lists::where('status', 1)->select('queue')->get();
+      foreach ($lists as $value) 
+      {
+        if ($value['queue'] != $queue) 
+        {
+          $left = $left + 1;
+        } 
+        else
+        {
+          break;
+        }
       }
     }
     return response()->json($left);
